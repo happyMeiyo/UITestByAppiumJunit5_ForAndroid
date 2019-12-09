@@ -27,6 +27,14 @@ public class VipPage extends BasePage {
         findElementByXpath("//android.widget.ScrollView//android.widget.TextView[@text='会员']").click();
     }
 
+    public void clearVipNoForSearch(){
+        try {
+            findElementById("tv_search_text").clear();
+        }catch (Exception ex){
+            System.out.println("会员搜索框无内容： " + ex);
+        }
+    }
+
     public void searchVipOfTelephone() {
         findElementById("ll_search_container").click();
         keyBoard.inputValueWithLeftKeyboard(telephone);

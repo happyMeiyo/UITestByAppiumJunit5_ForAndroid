@@ -8,23 +8,20 @@ import java.util.List;
 public class BasePage {
     protected static AndroidDriver driver;
 
-    static MobileElement findElementById(String using)
-    {
-        return (MobileElement)driver.findElementById("com.caibaopay.cashier:id/" + using);
+    static MobileElement findElementById(String using) {
+        return (MobileElement) driver.findElementById("com.caibaopay.cashier:id/" + using);
     }
 
-    static MobileElement findElementByXpath(String using)
-    {
-        return (MobileElement)driver.findElementByXPath(using);
+    static MobileElement findElementByXpath(String using) {
+        return (MobileElement) driver.findElementByXPath(using);
     }
 
-    static List<MobileElement> findElementsByXpath(String using)
-    {
+    static List<MobileElement> findElementsByXpath(String using) {
         return (List<MobileElement>) driver.findElementsByXPath(using);
     }
 
 
-    static boolean isElementPresent(String by, String using){
+    static boolean isElementPresent(String by, String using) {
         try {
             switch (by) {
                 case "By.Id":
@@ -38,13 +35,11 @@ public class BasePage {
                     return false;
             }
             return true;
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             return false;
         }
     }
-
 
 
 }

@@ -50,11 +50,25 @@ class TestShoppingCart extends TestBasePage {
         assertThat("商品加入购物车成功", sc.isExistGoodsInCart(), equalTo(true));
     }
 
-    @Order(300)
+
+    @Order(400)
     @DisplayName("清空购物车")
     @Test
     void deletesGoodsInCart() {
         sc.deletesGoodsInCart();
         assertThat("商品加入购物车成功", sc.isExistGoodsInCart(), equalTo(false));
     }
+
+    @DisplayName("编辑商品")
+    @ParameterizedTest
+    @ValueSource(strings = {"水果"})
+    void editGoods(String productName) {
+        sc.addToCart(productName);
+        assertThat("商品加入购物车成功", sc.isExistGoodsInCart(), equalTo(true));
+
+        sc.clickFirstGoodInCart();
+    }
+
+
+
 }

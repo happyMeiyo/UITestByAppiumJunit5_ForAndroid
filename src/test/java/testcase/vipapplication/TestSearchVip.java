@@ -21,9 +21,10 @@ class TestSearchVip extends TestBasePage {
 
     @DisplayName("查找会员成功")
     @ParameterizedTest
-    @ValueSource(strings = {"18621902561 ", "2561"})
+    @ValueSource(strings = {"18621902561", "2561"})
     void searchVipSuccess(String telephone) {
         vip.setTelephone(telephone);
+        vip.clearVipNoForSearch();
         vip.searchVipOfTelephone();
         assertThat("查找会员成功", vip.getTelephoneOfVip(), startsWith("1862190"));
     }
@@ -33,6 +34,7 @@ class TestSearchVip extends TestBasePage {
     @ValueSource(strings = {"123456789"})
     void searchVipFailure(String telephone) {
         vip.setTelephone(telephone);
+        vip.clearVipNoForSearch();
         vip.searchVipOfTelephone();
         assertThat("查找会员失败", vip.searchVipFailure(), equalTo(true));
     }

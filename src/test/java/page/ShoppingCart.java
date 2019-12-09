@@ -1,5 +1,7 @@
 package page;
 
+import util.keyBoard;
+
 import java.util.Arrays;
 import java.util.List;
 
@@ -57,6 +59,32 @@ public class ShoppingCart extends BasePage {
     public void  takeFirstOrderToCart(){
         findElementsByXpath("//android.support.v7.widget.RecyclerView" +
                 "[@resource-id='com.caibaopay.cashier:id/rlv_order_list']//*").get(0).click();
+    }
+
+    //点击购物车中的第一个商品
+    public void clickFirstGoodInCart(){
+        findElementsByXpath("//android.support.v7.widget.RecyclerView" +
+                "[@resource-id='com.caibaopay.cashier:id/rv_product']" +
+                "//android.widget.LinearLayout[@resource-id=com.caibaopay.cashier:id/ll_container']").get(0).click();
+    }
+
+    public void inputQuantityOfTheGood(String quantity){
+        findElementById("tv_count").click();
+        keyBoard.inputValueWithLeftKeyboard(quantity);
+    }
+
+    public void inputDiscountPriceOfTheGood(String price){
+        findElementById("tv_discount_price").click();
+        keyBoard.inputValueWithLeftKeyboard(price);
+    }
+
+    public void inputDiscountRateOfTheGood(String rate){
+        findElementById("tv_discount_rate").click();
+        keyBoard.inputValueWithLeftKeyboard(rate);
+    }
+
+    public void deleteOneGoodInCart() {
+        findElementById("tv_delete").click();
     }
 
 }

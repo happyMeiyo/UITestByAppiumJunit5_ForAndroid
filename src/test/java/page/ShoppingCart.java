@@ -2,28 +2,40 @@ package page;
 
 import util.keyBoard;
 
-import java.util.Arrays;
 import java.util.List;
 
 public class ShoppingCart extends BasePage {
+    public ShoppingCart(){
+        clickCashButton();
+    }
 
-    public void clickCashButton() {
+    public ShoppingCart(List<String> products){
+        clickCashButton();
+        addToCart(products);
+    }
+
+    private void clickCashButton() {
         findElementByXpath("//android.widget.ScrollView//android.widget.TextView[@text='收银']").click();
     }
 
     // 加入购物车
-    public void addToCart(String[] products) {
-        List<String> productNames = Arrays.asList(products);
+    private void addToCart(List<String> productNames) {
         productNames.forEach(productName -> findElementByXpath("//android.support.v7.widget.RecyclerView" +
                 "[@resource-id='com.caibaopay.cashier:id/rl_product']" +
                 "//android.widget.TextView[@text='" + productName + "']").click());
     }
+
+    //点击添加商品
     public void addToCart(String productName) {
         findElementByXpath("//android.support.v7.widget.RecyclerView" +
                 "[@resource-id='com.caibaopay.cashier:id/rl_product']" +
                 "//android.widget.TextView[@text='" + productName + "']").click();
     }
 
+    public void clickGoCashButton(){
+        findElementById("ll_go_cash").click();
+
+    }
 
     // 获取购物车的待收款金额
     public String getAmountOfGoodsInCart(){
@@ -65,26 +77,52 @@ public class ShoppingCart extends BasePage {
     public void clickFirstGoodInCart(){
         findElementsByXpath("//android.support.v7.widget.RecyclerView" +
                 "[@resource-id='com.caibaopay.cashier:id/rv_product']" +
-                "//android.widget.LinearLayout[@resource-id=com.caibaopay.cashier:id/ll_container']").get(0).click();
+                "//android.widget.LinearLayout[@resource-id='com.caibaopay.cashier:id/ll_container']").get(0).click();
     }
 
     public void inputQuantityOfTheGood(String quantity){
-        findElementById("tv_count").click();
-        keyBoard.inputValueWithLeftKeyboard(quantity);
+        findElementById("ll_count").click();
+        keyBoard.inputValueWithMiddleKeyboard(quantity);
     }
 
     public void inputDiscountPriceOfTheGood(String price){
         findElementById("tv_discount_price").click();
-        keyBoard.inputValueWithLeftKeyboard(price);
+        keyBoard.inputValueWithMiddleKeyboard(price);
     }
 
     public void inputDiscountRateOfTheGood(String rate){
         findElementById("tv_discount_rate").click();
-        keyBoard.inputValueWithLeftKeyboard(rate);
+        keyBoard.inputValueWithMiddleKeyboard(rate);
+    }
+
+    public int getQuantityOfOneGoodInCart(){
+        return Integer.parseInt(findElementById("tv_weight_num").getText());
+    }
+
+    public String getTagForOneGoodInCart(){
+        return findElementById("tv_tag").getText();
+    }
+
+    public boolean isExistTagForOneGoodInCart(){
+        return isElementPresent("By.Id", "tv_tag");
+    }
+
+    public void restoreOriginaPriceOfGood(){
+        findElementById("tv_restore_price").click();
+        keyBoard.inputKeyValueForMiddle('Y');
     }
 
     public void deleteOneGoodInCart() {
         findElementById("tv_delete").click();
     }
 
+    public void swipeAndClickLevelCategory(String categoryName) {
+        //滑动类目
+        swipeByCoordinate(categoryName, 0.73, 0.94,0.08, 0.08);
+
+        //点击类目
+        findElementByXpath("//android.support.v7.widget.RecyclerView" +
+                "[@resource-id='com.caibaopay.cashier:id/rl_parent_category']" +
+                "//android.widget.TextView[@text='" + categoryName + "']").click();
+    }
 }

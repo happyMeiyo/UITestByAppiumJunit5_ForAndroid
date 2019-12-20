@@ -1,7 +1,5 @@
 package util;
 
-import io.appium.java_client.TouchAction;
-import io.appium.java_client.touch.offset.PointOption;
 import page.BasePage;
 
 import java.util.List;
@@ -9,11 +7,7 @@ import java.util.stream.Collectors;
 
 public class keyBoard extends BasePage {
 
-    private static void touchKeyboard(int xPoint, int yPoint) {
-        (new TouchAction(driver)).tap(PointOption.point(xPoint, yPoint)).perform();
-    }
-
-    public static void inputKeyValueForLeft(char keyValue) {
+    private static void inputKeyValueForLeft(char keyValue) {
         switch (keyValue) {
             case '0':
                 touchKeyboard(202, 664);
@@ -111,6 +105,7 @@ public class keyBoard extends BasePage {
                 break;
             case 'C':
                 touchKeyboard(1295, 552);
+                break;
             case 'Y':
                 touchKeyboard(1292, 642);
                 break;
@@ -169,6 +164,7 @@ public class keyBoard extends BasePage {
                 break;
             case 'C':
                 touchKeyboard(888, 552);
+                break;
             case 'Y':
                 touchKeyboard(888, 642);
                 break;
@@ -183,6 +179,62 @@ public class keyBoard extends BasePage {
                 .mapToObj(e -> (char) e)
                 .collect(Collectors.toList());
         valueL.forEach(keyBoard::inputKeyValueForMiddle);
-        inputKeyValueForRight('Y');
+        inputKeyValueForMiddle('Y');
+    }
+
+
+    private static void inputKeyValueForTemp(char keyValue) {
+        switch (keyValue) {
+
+            case '0':
+                touchKeyboard(757, 440);
+                break;
+            case '1':
+                touchKeyboard(721, 382);
+                break;
+            case '2':
+                touchKeyboard(800, 382);
+                break;
+            case '3':
+                touchKeyboard(880, 382);
+                break;
+            case '4':
+                touchKeyboard(721, 333);
+                break;
+            case '5':
+                touchKeyboard(800, 333);
+                break;
+            case '6':
+                touchKeyboard(880, 333);
+                break;
+            case '7':
+                touchKeyboard(721, 273);
+                break;
+            case '8':
+                touchKeyboard(800, 273);
+                break;
+            case '9':
+                touchKeyboard(880, 273);
+                break;
+            case '.':
+                touchKeyboard(880, 440);
+                break;
+            case 'X':
+                touchKeyboard(964, 301);
+                break;
+            case 'C':
+                touchKeyboard(964, 413);
+                break;
+            default:
+                System.out.println("Input Invalid: " + keyValue);
+        }
+
+    }
+
+    public static void inputValueWithTempKeyboard(String value) {
+        List<Character> valueL = value.chars()
+                .mapToObj(e -> (char) e)
+                .collect(Collectors.toList());
+        valueL.forEach(keyBoard::inputKeyValueForTemp);
     }
 }

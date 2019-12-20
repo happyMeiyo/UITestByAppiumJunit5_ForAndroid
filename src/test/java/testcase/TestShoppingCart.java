@@ -2,21 +2,21 @@ package testcase;
 
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.ValueSource;
 import page.ShoppingCart;
 
+import java.util.stream.Stream;
+
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.*;
+import static org.junit.jupiter.params.provider.Arguments.arguments;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class TestShoppingCart extends TestBasePage {
 
     private static ShoppingCart sc = new ShoppingCart();
-
-    @BeforeAll
-    static void clickCashButton() {
-        sc.clickCashButton();
-    }
 
     @Order(1)
     @DisplayName("添加商品到购物车")
@@ -51,7 +51,7 @@ class TestShoppingCart extends TestBasePage {
     }
 
 
-    @Order(400)
+    @Order(300)
     @DisplayName("清空购物车")
     @Test
     void deletesGoodsInCart() {
@@ -59,16 +59,43 @@ class TestShoppingCart extends TestBasePage {
         assertThat("商品加入购物车成功", sc.isExistGoodsInCart(), equalTo(false));
     }
 
-    @DisplayName("编辑商品")
+    private static Stream<Arguments> getQuantityAndPrice() {
+        return Stream.of(
+                arguments("水果", "5", "15.5")
+        );
+    }
+
+    @Order(400)
+    @DisplayName("购物车编辑商品：数量和价格")
     @ParameterizedTest
-    @ValueSource(strings = {"水果"})
-    void editGoods(String productName) {
+    @MethodSource("getQuantityAndPrice")
+    void editGoods(String productName, String quantity, String discountPrice) {
         sc.addToCart(productName);
         assertThat("商品加入购物车成功", sc.isExistGoodsInCart(), equalTo(true));
 
+        //新增商品数量
         sc.clickFirstGoodInCart();
+        sc.inputQuantityOfTheGood(quantity);
+        assertThat("修改商品数量成功", sc.getQuantityOfOneGoodInCart(), greaterThan(1));
+
+        //输入折扣价格
+        sc.clickFirstGoodInCart();
+        sc.inputDiscountPriceOfTheGood(discountPrice);
+        assertThat("调低商品价格成功", sc.getTagForOneGoodInCart(), containsString("折"));
+
+        //恢复商品价格
+        sc.clickFirstGoodInCart();
+        sc.restoreOriginaPriceOfGood();
+        assertThat("恢复商品价格成功", sc.isExistTagForOneGoodInCart(), equalTo(false));
     }
 
-
+    @Order(500)
+    @DisplayName("删除购物车商品")
+    @Test
+    void deleteOneGoodInCart(){
+        sc.clickFirstGoodInCart();
+        sc.deleteOneGoodInCart();
+        assertThat("删除单个商品成功", sc.isExistGoodsInCart(), equalTo(false));
+    }
 
 }

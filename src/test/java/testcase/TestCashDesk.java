@@ -21,13 +21,6 @@ import static org.hamcrest.Matchers.equalTo;
 import static org.junit.jupiter.params.provider.Arguments.arguments;
 
 class TestCashDesk extends TestBasePage{
-
-//    private static Stream<Arguments> getProductsName() {
-//        return Stream.of(
-//                arguments("临时商品", Arrays.asList("红玫瑰苹果", "劲霸汤皇"), "临时商品-计件", 2, 2.23)
-//        );
-//    }
-
     private static Stream<Arguments> getTelephoneOfVip() {
         return Stream.of(
                 arguments("18621902561")

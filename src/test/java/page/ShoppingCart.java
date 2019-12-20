@@ -118,7 +118,7 @@ public class ShoppingCart extends BasePage {
 
     public void swipeAndClickLevelCategory(String categoryName) {
         //滑动类目
-        swipeByCoordinate(categoryName, 0.73, 0.94,0.08, 0.08);
+        swipeByCoordinateWithElement(categoryName, 0.73, 0.94,0.08, 0.08);
 
         //点击类目
         findElementByXpath("//android.support.v7.widget.RecyclerView" +

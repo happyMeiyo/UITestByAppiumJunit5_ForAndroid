@@ -18,8 +18,6 @@ public class TestBasePage extends TestApp {
     @BeforeAll
     static void userLogin() {
         ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
-        //mapper.findAndRegisterModules();
-
         try {
             UserLogin user = mapper.readValue(TestBasePage.class.getResourceAsStream("/shopManagerInfo.yml"),
                                               UserLogin.class);

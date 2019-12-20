@@ -18,8 +18,6 @@ class TestUserLogin extends TestApp {
     void userLoginSuccess() {
         UserLogin ul = new UserLogin();
         ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
-        //mapper.findAndRegisterModules();
-
         try {
             UserLogin user = mapper.readValue(TestBasePage.class.getResourceAsStream("/cashierInfo.yml"),
                     UserLogin.class);

@@ -6,7 +6,7 @@ public class UserLogin extends BasePage {
     private String userCode;
     private String password;
 
-    public UserLogin(){
+    public UserLogin() {
     }
 
     public UserLogin(String merchantCode, String userCode, String password) {
@@ -19,11 +19,11 @@ public class UserLogin extends BasePage {
         return merchantCode;
     }
 
-    public String getUserCode(){
+    public String getUserCode() {
         return userCode;
     }
 
-    public String getPassword(){
+    public String getPassword() {
         return password;
     }
 

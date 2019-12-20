@@ -2,18 +2,18 @@ package page;
 
 import util.keyBoard;
 
-public class TempProduct extends BasePage{
+public class TempProduct extends BasePage {
     private String productName;
     private int quantity;
     private double price;
 
-    public TempProduct(String productName, int quantity, double price){
+    public TempProduct(String productName, int quantity, double price) {
         this.productName = productName;
         this.quantity = quantity;
         this.price = price;
     }
 
-    private void inputPriceAndQuantityOfTempPrd(String price, String quantity){
+    private void inputPriceAndQuantityOfTempPrd(String price, String quantity) {
         findElementById("tv_sale_price").click();
         keyBoard.inputValueWithTempKeyboard(price);
 
@@ -22,9 +22,9 @@ public class TempProduct extends BasePage{
 
     }
 
-    private void inputPriceAndQuantityOfTempPrd(String categoryName){
+    private void inputPriceAndQuantityOfTempPrd(String categoryName) {
         //一级类目滑动到“临时商品”
-        swipeByCoordinate(categoryName, 0.94, 0.73, 0.08, 0.08);
+        swipeByCoordinateWithElement(categoryName, 0.94, 0.73, 0.08, 0.08);
 
         //点击临时商品类目
         findElementByXpath("//android.support.v7.widget.RecyclerView" +
@@ -41,11 +41,11 @@ public class TempProduct extends BasePage{
     }
 
     // 获取临时商品的价格
-    public String getAmountOfTempPrpduct(){
+    public String getAmountOfTempPrpduct() {
         return findElementById("tv_total_price").getText();
     }
 
-    public void addTempProductToCart(String categoryName){
+    public void addTempProductToCart(String categoryName) {
         inputPriceAndQuantityOfTempPrd(categoryName);
         findElementById("tv_confirm").click();
     }

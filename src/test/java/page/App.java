@@ -1,34 +1,46 @@
 package page;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 import io.appium.java_client.android.AndroidDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
+
+import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 public class App extends BasePage{
-    public static void start() throws MalformedURLException {
-        DesiredCapabilities desiredCapabilities = new DesiredCapabilities();
-        desiredCapabilities.setCapability("platformName", "Android");
-        desiredCapabilities.setCapability("platformVersion", "7.1.2");
-        desiredCapabilities.setCapability("deviceName", "DA08196340368");
-        desiredCapabilities.setCapability("appPackage", "com.caibaopay.cashier");
-        desiredCapabilities.setCapability("appActivity", ".view.login.LoginActivity");
-        desiredCapabilities.setCapability("noReset", true);
 
-        URL remoteUrl = new URL("http://localhost:4723/wd/hub");
+    private static class Capability{
+        private Map<String, String> capability;
+        private String url;
+
+        public void setCapability(Map<String, String> capability) {
+            this.capability = capability;
+        }
+
+        public void setUrl(String url) {
+            this.url = url;
+        }
+    }
+    public static void start() throws MalformedURLException {
+        ObjectMapper mapper=new ObjectMapper(new YAMLFactory());
+        DesiredCapabilities desiredCapabilities = new DesiredCapabilities();
+        Capability cp = new Capability();
+
+        try {
+            cp = mapper.readValue(App.class.getResourceAsStream("/app.yml"), Capability.class);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        cp.capability.forEach(desiredCapabilities::setCapability);
+        URL remoteUrl = new URL(cp.url);
         driver = new AndroidDriver(remoteUrl, desiredCapabilities);
 
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-
-//        new WebDriverWait(driver, 30)
-//                .until(x -> {
-//                    System.out.println(System.currentTimeMillis());
-//                    String xml=driver.getPageSource();
-//                    Boolean exist=xml.contains("home_search") || xml.contains("image_cancel") ;
-//                    System.out.println(exist);
-//                    return exist;
-//                });
 
     }
 

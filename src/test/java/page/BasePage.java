@@ -48,7 +48,7 @@ public class BasePage {
         (new TouchAction(driver)).tap(PointOption.point(xPoint, yPoint)).perform();
     }
 
-    protected static void swipeByCoordinate(String element,double startX,double endX,double startY,double endY) {
+    static void swipeByCoordinateWithElement(String element, double startX, double endX, double startY, double endY) {
         //获取屏幕大小
         Dimension screenSize=driver.manage().window().getSize();
 

@@ -27,10 +27,10 @@ public class VipPage extends BasePage {
         findElementByXpath("//android.widget.ScrollView//android.widget.TextView[@text='会员']").click();
     }
 
-    public void clearVipNoForSearch(){
+    public void clearVipNoForSearch() {
         try {
             findElementById("tv_search_text").clear();
-        }catch (Exception ex){
+        } catch (Exception ex) {
             System.out.println("会员搜索框无内容： " + ex);
         }
     }
@@ -95,16 +95,16 @@ public class VipPage extends BasePage {
         findElementById("tv_confirm").click();
     }
 
-    public void bandPhysicalCard(String card){
+    public void bandPhysicalCard(String card) {
         findElementById("rl_physical_card").click();
         keyBoard.inputValueWithRightKeyboard(card);
     }
 
-    public String getPhysicalCardNo(){
+    public String getPhysicalCardNo() {
         return findElementById("tv_input_no").getText();
     }
 
-    public void unbandPhysicalCard(){
+    public void unbandPhysicalCard() {
         findElementById("tv_unbind").click();
     }
 

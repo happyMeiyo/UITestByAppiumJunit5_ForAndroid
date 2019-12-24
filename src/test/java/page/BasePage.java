@@ -8,8 +8,9 @@ import org.openqa.selenium.Dimension;
 
 import java.util.List;
 
-public class BasePage {
-    protected static AndroidDriver driver;
+public class BasePage extends App {
+
+    private static AndroidDriver driver = getDriver();
 
     static MobileElement findElementById(String using) {
         return (MobileElement) driver.findElementById("com.caibaopay.cashier:id/" + using);
@@ -20,8 +21,11 @@ public class BasePage {
     }
 
     static List<MobileElement> findElementsByXpath(String using) {
-        return (List<MobileElement>) driver.findElementsByXPath(using);
+        return driver.findElementsByXPath(using);
+        //return (List<MobileElement>) driver.findElementsByXPath(using);
     }
+
+
 
 
     static boolean isElementPresent(String by, String using) {
@@ -50,13 +54,13 @@ public class BasePage {
 
     static void swipeByCoordinateWithElement(String element, double startX, double endX, double startY, double endY) {
         //获取屏幕大小
-        Dimension screenSize=driver.manage().window().getSize();
+        Dimension screenSize = driver.manage().window().getSize();
 
-        while(true) {
+        while (true) {
             try {
                 (new TouchAction(driver))
-                        .longPress(PointOption.point((int)(screenSize.width * startX),(int)(screenSize.height * startY)))
-                        .moveTo(PointOption.point((int) (screenSize.width * endX),(int) (screenSize.height * endY)))
+                        .longPress(PointOption.point((int) (screenSize.width * startX), (int) (screenSize.height * startY)))
+                        .moveTo(PointOption.point((int) (screenSize.width * endX), (int) (screenSize.height * endY)))
                         .release()
                         .perform();
             } catch (Exception e) {

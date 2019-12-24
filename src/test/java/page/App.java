@@ -11,40 +11,46 @@ import java.net.URL;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
-public class App extends BasePage{
+public class App {
 
-    private static class Capability{
+    private static AndroidDriver driver;
+
+    static AndroidDriver getDriver() {
+        return driver;
+    }
+
+    private static class Capability {
         private Map<String, String> capability;
         private String url;
+
+        public void setUrl(String url) {
+            this.url = url;
+        }
 
         public void setCapability(Map<String, String> capability) {
             this.capability = capability;
         }
 
-        public void setUrl(String url) {
-            this.url = url;
-        }
     }
+
     public static void start() throws MalformedURLException {
-        ObjectMapper mapper=new ObjectMapper(new YAMLFactory());
+        ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
         DesiredCapabilities desiredCapabilities = new DesiredCapabilities();
-        Capability cp = new Capability();
 
         try {
-            cp = mapper.readValue(App.class.getResourceAsStream("/app.yml"), Capability.class);
+            Capability cp = mapper.readValue(App.class.getResourceAsStream("/app.yml"), Capability.class);
+            cp.capability.forEach(desiredCapabilities::setCapability);
+            URL remoteUrl = new URL(cp.url);
+            driver = new AndroidDriver(remoteUrl, desiredCapabilities);
 
         } catch (IOException e) {
             e.printStackTrace();
         }
-        cp.capability.forEach(desiredCapabilities::setCapability);
-        URL remoteUrl = new URL(cp.url);
-        driver = new AndroidDriver(remoteUrl, desiredCapabilities);
 
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-
     }
 
-    public static void stop(){
+    public static void stop() {
         driver.quit();
     }
 

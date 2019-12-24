@@ -11,6 +11,7 @@ import java.io.IOException;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 
+@DisplayName("测试用户登录")
 class TestUserLogin extends TestApp {
 
     @Test
@@ -43,5 +44,8 @@ class TestUserLogin extends TestApp {
         String errorInfo = ul.getErrorInfo();
         assertThat("不存在的用户登录", errorInfo, equalTo("企业号或账号不正确"));
     }
+
+
+
 
 }

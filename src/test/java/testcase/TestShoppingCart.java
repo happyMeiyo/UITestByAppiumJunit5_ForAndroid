@@ -14,7 +14,8 @@ import static org.hamcrest.Matchers.*;
 import static org.junit.jupiter.params.provider.Arguments.arguments;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-class TestShoppingCart extends TestBasePage {
+@DisplayName("测试购物车")
+public class TestShoppingCart extends TestBasePage {
 
     private static ShoppingCart sc = new ShoppingCart();
 

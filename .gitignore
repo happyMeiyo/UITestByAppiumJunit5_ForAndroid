@@ -1,3 +1,8 @@
 
 *.class
 *.yml
+*.json
+*.dumpstream
+*.txt
+*.xml
+*.lst

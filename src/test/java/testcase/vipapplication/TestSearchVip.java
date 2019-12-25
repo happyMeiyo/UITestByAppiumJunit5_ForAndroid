@@ -5,14 +5,14 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 import page.VipPage;
-import testcase.TestBasePage;
+import testcase.UserLoginOrOut;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.startsWith;
 
 @DisplayName("测试搜索会员")
-class TestSearchVip extends TestBasePage {
+class TestSearchVip extends UserLoginOrOut {
     private static VipPage vip = new VipPage();
 
     @BeforeAll

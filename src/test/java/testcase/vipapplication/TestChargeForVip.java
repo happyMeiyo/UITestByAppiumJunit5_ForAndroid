@@ -4,7 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 import org.junit.jupiter.api.*;
 import page.VipPage;
-import testcase.TestBasePage;
+import testcase.UserLoginOrOut;
 
 import java.io.IOException;
 
@@ -13,7 +13,7 @@ import static org.hamcrest.Matchers.equalTo;
 
 @DisplayName("测试会员充值")
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-class TestChargeForVip extends TestBasePage {
+class TestChargeForVip extends UserLoginOrOut {
     private static VipPage vip;
 
     @BeforeAll

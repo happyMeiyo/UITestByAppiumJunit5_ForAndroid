@@ -15,7 +15,7 @@ import static org.junit.jupiter.params.provider.Arguments.arguments;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 @DisplayName("测试购物车")
-class TestShoppingCart extends TestBasePage {
+class TestShoppingCart extends UserLoginOrOut {
 
     private static ShoppingCart sc = new ShoppingCart();
 

@@ -8,7 +8,7 @@ import page.App;
 import java.net.MalformedURLException;
 
 @DisplayName("启动或停止APP")
-class TestApp {
+class AppStartOrStop {
 
     @BeforeAll
     static void startApp() throws MalformedURLException {

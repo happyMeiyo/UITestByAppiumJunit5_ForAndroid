@@ -13,7 +13,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 
 @DisplayName("用户登录或退出")
-public class TestBasePage extends TestApp {
+public class UserLoginOrOut extends AppStartOrStop {
 
     private static UserLogin ul;
 
@@ -21,7 +21,7 @@ public class TestBasePage extends TestApp {
     static void userLogin() {
         ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
         try {
-            UserLogin user = mapper.readValue(TestBasePage.class.getResourceAsStream("/shopManagerInfo.yml"),
+            UserLogin user = mapper.readValue(UserLoginOrOut.class.getResourceAsStream("/shopManagerInfo.yml"),
                                               UserLogin.class);
 
             ul = new UserLogin(user.getMerchantCode(), user.getUserCode(), user.getPassword());

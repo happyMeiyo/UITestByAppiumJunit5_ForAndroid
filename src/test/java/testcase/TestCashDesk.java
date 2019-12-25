@@ -21,7 +21,7 @@ import static org.hamcrest.Matchers.equalTo;
 import static org.junit.jupiter.params.provider.Arguments.arguments;
 
 @DisplayName("测试收款页面")
-class TestCashDesk extends TestBasePage{
+class TestCashDesk extends UserLoginOrOut {
     private static Stream<Arguments> getTelephoneOfVip() {
         return Stream.of(
                 arguments("18621902561")

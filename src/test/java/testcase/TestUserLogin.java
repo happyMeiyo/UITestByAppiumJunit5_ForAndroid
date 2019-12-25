@@ -12,7 +12,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 
 @DisplayName("测试用户登录")
-class TestUserLogin extends TestApp {
+class TestUserLogin extends AppStartOrStop {
 
     @Test
     @DisplayName("用户登录成功")
@@ -20,7 +20,7 @@ class TestUserLogin extends TestApp {
         UserLogin ul = new UserLogin();
         ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
         try {
-            UserLogin user = mapper.readValue(TestBasePage.class.getResourceAsStream("/cashierInfo.yml"),
+            UserLogin user = mapper.readValue(UserLoginOrOut.class.getResourceAsStream("/cashierInfo.yml"),
                     UserLogin.class);
 
             ul = new UserLogin(user.getMerchantCode(), user.getUserCode(), user.getPassword());

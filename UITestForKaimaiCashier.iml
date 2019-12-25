@@ -6,12 +6,13 @@
     </facet>
   </component>
   <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_8">
-    <output url="file://$MODULE_DIR$/target/classes" />
-    <output-test url="file://$MODULE_DIR$/target/test-classes" />
+    <output url="file://$MODULE_DIR$/../UITestForKaimaiCashier/target/classes" />
+    <output-test url="file://$MODULE_DIR$/../UITestForKaimaiCashier/target/test-classes" />
     <content url="file://$MODULE_DIR$/../UITestForKaimaiCashier">
       <sourceFolder url="file://$MODULE_DIR$/../UITestForKaimaiCashier/src/main/java" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/../UITestForKaimaiCashier/src/main/resources" type="java-resource" />
       <sourceFolder url="file://$MODULE_DIR$/../UITestForKaimaiCashier/src/test/java" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/../UITestForKaimaiCashier/src/main/resources" type="java-test-resource" />
+      <excludeFolder url="file://$MODULE_DIR$/../UITestForKaimaiCashier/src/test/java/testsuite" />
       <excludeFolder url="file://$MODULE_DIR$/../UITestForKaimaiCashier/target" />
     </content>
     <orderEntry type="inheritedJdk" />

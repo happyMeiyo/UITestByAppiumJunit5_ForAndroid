@@ -11,6 +11,7 @@ import java.io.IOException;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 
+@DisplayName("测试会员充值")
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class TestChargeForVip extends TestBasePage {
     private static VipPage vip;

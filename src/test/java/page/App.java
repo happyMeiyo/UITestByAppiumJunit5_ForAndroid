@@ -13,11 +13,11 @@ import java.util.concurrent.TimeUnit;
 
 public class App {
 
-    private static AndroidDriver driver;
+    static AndroidDriver driver;
 
-    static AndroidDriver getDriver() {
-        return driver;
-    }
+//    static AndroidDriver getDriver() {
+//        return driver;
+//    }
 
     private static class Capability {
         private Map<String, String> capability;

@@ -11,6 +11,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.startsWith;
 
+@DisplayName("测试搜索会员")
 class TestSearchVip extends TestBasePage {
     private static VipPage vip = new VipPage();
 

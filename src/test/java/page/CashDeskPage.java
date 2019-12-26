@@ -17,9 +17,8 @@ public class CashDeskPage extends BasePage {
         inputTelephoneForVip(telephone);
     }
 
-    public double getAmountForPendingPay() {
-        String amount = findElementById("tv_pending_amount").getText();
-        return Double.parseDouble(amount);
+    public String getAmountForPendingPay() {
+        return findElementById("tv_pending_amount").getText();
     }
 
     public void selectPayWithCash() {
@@ -27,14 +26,12 @@ public class CashDeskPage extends BasePage {
                 "//android.widget.TextView[@text='现金&记账']").get(0).click();
     }
 
-    public double getAmountReceived() {
-        String amount = findElementById("atv_amount").getText();
-        return Double.parseDouble(amount);
+    public String getAmountReceived() {
+        return findElementById("atv_amount").getText();
     }
 
-    public double getAmountForChange() {
-        String amount = findElementById("atv_cash_back").getText();
-        return Double.parseDouble(amount);
+    public String getAmountForChange() {
+        return findElementById("atv_cash_back").getText();
     }
 
     public void selectAmountReceived() {
@@ -42,7 +39,7 @@ public class CashDeskPage extends BasePage {
     }
 
     public void payWithCash() {
-        keyBoard.inputKeyValueForRight('Y');
+        keyBoard.inputValueWithKeyboard("RIGHT", "Y");
     }
 
     public void payWithVipCard() {

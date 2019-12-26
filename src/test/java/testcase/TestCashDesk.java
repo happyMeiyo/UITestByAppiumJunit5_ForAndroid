@@ -11,6 +11,7 @@ import page.CashDeskPage;
 import page.ShoppingCart;
 import page.TempProduct;
 
+import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Stream;
@@ -37,7 +38,7 @@ class TestCashDesk extends UserLoginOrOut {
         sc = new ShoppingCart(products);
 
         // 添加临时商品
-        TempProduct tp = new TempProduct("临时商品-计件", 2, 2.43);
+        TempProduct tp = new TempProduct("临时商品-计件", 4, 58);
         tp.addTempProductToCart("临时商品");
 
         //点击去付款
@@ -65,8 +66,11 @@ class TestCashDesk extends UserLoginOrOut {
         cp.selectAmountReceived();
 
         //计算找零金额正确
-        double changeAmount = cp.getAmountReceived() - cp.getAmountForPendingPay();
-        assertThat("找零金额计算正确", cp.getAmountForChange(), equalTo(changeAmount));
+        double changeAmount = 0.00;
+        changeAmount = new BigDecimal(cp.getAmountReceived())
+                .subtract(new BigDecimal(cp.getAmountForPendingPay()))
+                .doubleValue();
+        assertThat("找零金额计算正确", cp.getAmountForChange(), equalTo(String.format("%.2f", changeAmount)));
 
         //发起现金收款
         cp.payWithCash();

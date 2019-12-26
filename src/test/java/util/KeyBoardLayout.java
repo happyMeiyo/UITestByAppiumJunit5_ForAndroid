@@ -64,27 +64,27 @@ public class KeyBoardLayout {
         switch (keyValue) {
             case '0':
             case '.':
-                y_crd = getTop() + 207;
+                y_crd = getTop() + 194;
                 break;
             case '1':
             case '2':
             case '3':
-                y_crd = getTop() + 147;
+                y_crd = getTop() + 134;
                 break;
             case '4':
             case '5':
             case '6':
             case 'C':
-                y_crd = getTop() + 95;
+                y_crd = getTop() + 82;
                 break;
             case '7':
             case '8':
             case '9':
             case 'X':
-                y_crd = getTop() + 43;
+                y_crd = getTop() + 30;
                 break;
             case 'Y':
-                y_crd = getTop() + 185;
+                y_crd = getTop() + 155;
                 break;
             default:
                 System.out.println("Input Invalid: " + keyValue);

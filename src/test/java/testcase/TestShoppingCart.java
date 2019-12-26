@@ -86,7 +86,7 @@ class TestShoppingCart extends UserLoginOrOut {
 
         //恢复商品价格
         sc.clickFirstGoodInCart();
-        sc.restoreOriginaPriceOfGood();
+        sc.restoreOriginalPriceOfGood();
         assertThat("恢复商品价格成功", sc.isExistTagForOneGoodInCart(), equalTo(false));
     }
 

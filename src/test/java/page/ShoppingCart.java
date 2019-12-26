@@ -107,9 +107,9 @@ public class ShoppingCart extends BasePage {
         return isElementPresent("By.Id", "tv_tag");
     }
 
-    public void restoreOriginaPriceOfGood(){
+    public void restoreOriginalPriceOfGood(){
         findElementById("tv_restore_price").click();
-        keyBoard.inputKeyValueForMiddle('Y');
+        keyBoard.inputValueWithKeyboard("MIDDLE", "Y");
     }
 
     public void deleteOneGoodInCart() {

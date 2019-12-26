@@ -37,7 +37,7 @@ public class TempProduct extends BasePage {
                 "//android.widget.TextView[@text='" + productName + "']").click();
 
         //输入售价和数量
-        inputPriceAndQuantityOfTempPrd(Double.toString(price), Integer.toString(quantity));
+        inputPriceAndQuantityOfTempPrd(String.format("%.0f", price), Integer.toString(quantity));
     }
 
     // 获取临时商品的价格

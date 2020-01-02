@@ -51,7 +51,6 @@ class TestShoppingCart extends UserLoginOrOut {
         assertThat("商品加入购物车成功", sc.isExistGoodsInCart(), equalTo(true));
     }
 
-
     @Order(300)
     @DisplayName("清空购物车")
     @Test
@@ -91,7 +90,7 @@ class TestShoppingCart extends UserLoginOrOut {
     }
 
     @Order(500)
-    @DisplayName("删除购物车商品")
+    @DisplayName("购物车编辑商品：删除商品")
     @Test
     void deleteOneGoodInCart(){
         sc.clickFirstGoodInCart();

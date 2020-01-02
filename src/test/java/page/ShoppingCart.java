@@ -1,15 +1,19 @@
 package page;
 
+import io.appium.java_client.TouchAction;
+import io.appium.java_client.touch.offset.PointOption;
+import org.openqa.selenium.Dimension;
+import org.openqa.selenium.Point;
 import util.keyBoard;
 
 import java.util.List;
 
 public class ShoppingCart extends BasePage {
-    public ShoppingCart(){
+    public ShoppingCart() {
         clickCashButton();
     }
 
-    public ShoppingCart(List<String> products){
+    public ShoppingCart(List<String> products) {
         clickCashButton();
         addToCart(products);
     }
@@ -32,24 +36,23 @@ public class ShoppingCart extends BasePage {
                 "//android.widget.TextView[@text='" + productName + "']").click();
     }
 
-    public void clickGoCashButton(){
+    public void clickGoCashButton() {
         findElementById("ll_go_cash").click();
 
     }
 
     // 获取购物车的待收款金额
-    public String getAmountOfGoodsInCart(){
+    public String getAmountOfGoodsInCart() {
         return findElementById("ltv_total_discount_price").getText();
     }
 
     //清空购物车
-    public void deletesGoodsInCart(){
+    public void deletesGoodsInCart() {
         findElementById("ll_delete_all").click();
         findElementById("tv_confirm").click();
     }
 
-    public boolean isExistGoodsInCart()
-    {
+    public boolean isExistGoodsInCart() {
         return (findElementsByXpath("//android.support.v7.widget.RecyclerView" +
                 "[@resource-id='com.caibaopay.cashier:id/rv_product']/*").size() > 0);
     }
@@ -68,46 +71,46 @@ public class ShoppingCart extends BasePage {
     }
 
     //获取挂单列表中第一个订单，到购物车
-    public void  takeFirstOrderToCart(){
+    public void takeFirstOrderToCart() {
         findElementsByXpath("//android.support.v7.widget.RecyclerView" +
                 "[@resource-id='com.caibaopay.cashier:id/rlv_order_list']//*").get(0).click();
     }
 
     //点击购物车中的第一个商品
-    public void clickFirstGoodInCart(){
+    public void clickFirstGoodInCart() {
         findElementsByXpath("//android.support.v7.widget.RecyclerView" +
                 "[@resource-id='com.caibaopay.cashier:id/rv_product']" +
                 "//android.widget.LinearLayout[@resource-id='com.caibaopay.cashier:id/ll_container']").get(0).click();
     }
 
-    public void inputQuantityOfTheGood(String quantity){
+    public void inputQuantityOfTheGood(String quantity) {
         findElementById("ll_count").click();
         keyBoard.inputValueWithMiddleKeyboard(quantity);
     }
 
-    public void inputDiscountPriceOfTheGood(String price){
+    public void inputDiscountPriceOfTheGood(String price) {
         findElementById("tv_discount_price").click();
         keyBoard.inputValueWithMiddleKeyboard(price);
     }
 
-    public void inputDiscountRateOfTheGood(String rate){
+    public void inputDiscountRateOfTheGood(String rate) {
         findElementById("tv_discount_rate").click();
         keyBoard.inputValueWithMiddleKeyboard(rate);
     }
 
-    public int getQuantityOfOneGoodInCart(){
+    public int getQuantityOfOneGoodInCart() {
         return Integer.parseInt(findElementById("tv_weight_num").getText());
     }
 
-    public String getTagForOneGoodInCart(){
+    public String getTagForOneGoodInCart() {
         return findElementById("tv_tag").getText();
     }
 
-    public boolean isExistTagForOneGoodInCart(){
+    public boolean isExistTagForOneGoodInCart() {
         return isElementPresent("By.Id", "tv_tag");
     }
 
-    public void restoreOriginalPriceOfGood(){
+    public void restoreOriginalPriceOfGood() {
         findElementById("tv_restore_price").click();
         keyBoard.inputValueWithKeyboard("MIDDLE", "Y");
     }
@@ -118,11 +121,40 @@ public class ShoppingCart extends BasePage {
 
     public void swipeAndClickLevelCategory(String categoryName) {
         //滑动类目
-        swipeByCoordinateWithElement(categoryName, 0.73, 0.94,0.08, 0.08);
+        swipeByCoordinateWithElement(categoryName, 0.73, 0.94, 0.08, 0.08);
 
         //点击类目
         findElementByXpath("//android.support.v7.widget.RecyclerView" +
                 "[@resource-id='com.caibaopay.cashier:id/rl_parent_category']" +
                 "//android.widget.TextView[@text='" + categoryName + "']").click();
+    }
+
+    public void deleteOneGoodWithLeftSwipe() {
+        String element = "//android.support.v7.widget.RecyclerView" +
+                "[@resource-id='com.caibaopay.cashier:id/rv_product']" +
+                "//android.widget.LinearLayout[@resource-id='com.caibaopay.cashier:id/ll_container']";
+
+        Point start=getLocationOfTheFirstGoodInCart(element);
+        int startX = start.x;
+        int startY = start.y;
+        Dimension wh=getSizeOfTheFirstGoodInCart(element);
+        int widthX=wh.getWidth();
+        int heightY=wh.getHeight();
+        int endX = widthX + startX;
+        int endY = heightY/2 + startY;
+        (new TouchAction(driver)).longPress(PointOption.point(endX,endY))
+                .moveTo(PointOption.point(startX + (int)(widthX * 0.25),endY))
+                .release()
+                .perform();
+    }
+
+    public Dimension getSizeOfTheFirstGoodInCart(String element) {
+        return findElementsByXpath(element).get(0).getSize();
+    }
+
+    public Point getLocationOfTheFirstGoodInCart(String element) {
+        return findElementsByXpath(element)
+                .get(0)
+                .getLocation();
     }
 }

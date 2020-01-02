@@ -15,10 +15,6 @@ public class App {
 
     static AndroidDriver driver;
 
-//    static AndroidDriver getDriver() {
-//        return driver;
-//    }
-
     private static class Capability {
         private Map<String, String> capability;
         private String url;

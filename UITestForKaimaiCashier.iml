@@ -12,7 +12,6 @@
       <sourceFolder url="file://$MODULE_DIR$/../UITestForKaimaiCashier/src/main/java" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/../UITestForKaimaiCashier/src/test/java" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/../UITestForKaimaiCashier/src/main/resources" type="java-test-resource" />
-      <excludeFolder url="file://$MODULE_DIR$/../UITestForKaimaiCashier/src/test/java/testsuite" />
       <excludeFolder url="file://$MODULE_DIR$/../UITestForKaimaiCashier/target" />
     </content>
     <orderEntry type="inheritedJdk" />

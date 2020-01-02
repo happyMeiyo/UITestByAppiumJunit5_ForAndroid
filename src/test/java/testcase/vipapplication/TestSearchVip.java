@@ -39,6 +39,4 @@ class TestSearchVip extends UserLoginOrOut {
         vip.searchVipOfTelephone();
         assertThat("查找会员失败", vip.searchVipFailure(), equalTo(true));
     }
-
-
 }

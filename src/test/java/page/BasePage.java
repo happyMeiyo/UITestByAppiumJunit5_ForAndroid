@@ -8,9 +8,6 @@ import org.openqa.selenium.Dimension;
 import java.util.List;
 
 public class BasePage extends App {
-
-//    private static AndroidDriver driver = getDriver();
-
     static MobileElement findElementById(String using) {
         return (MobileElement) driver.findElementById("com.caibaopay.cashier:id/" + using);
     }
@@ -80,4 +77,21 @@ public class BasePage extends App {
             }
         }
     }
+
+//    void InputKeyCode() {
+//        try {
+//
+//            //Runtime.getRuntime().exec("adb shell ime set com.sohu.inputmethod.sogou/.SogouIME");
+//            Process result = Runtime.getRuntime().exec("adb shell ime set com.sohu.inputmethod.sogou/.SogouIME");
+//            System.out.println(result);
+//
+//            driver.pressKey(new KeyEvent(AndroidKey.DIGIT_1));
+//            driver.pressKey(new KeyEvent(AndroidKey.DIGIT_2));
+//
+//            Runtime.getRuntime().exec("adb shell ime set com.netease.nie.yosemite/.ime.ImeService");
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//
+//    }
 }

@@ -2,6 +2,8 @@ package testcase.vipapplication;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
+import io.qameta.allure.Description;
+import io.qameta.allure.Flaky;
 import org.junit.jupiter.api.*;
 import page.VipPage;
 import testcase.UserLoginOrOut;
@@ -31,7 +33,7 @@ class TestChargeForVip extends UserLoginOrOut {
     }
 
     @Order(1)
-    @DisplayName("会员现金充值成功")
+    @Description("会员现金充值成功")
     @Test
     void chargeForVipWithCash() {
         vip.clickBalance();
@@ -45,7 +47,7 @@ class TestChargeForVip extends UserLoginOrOut {
     }
 
     @Order(100)
-    @DisplayName("查看券列表")
+    @Description("查看券列表")
     @Test
     void checkCoupon() {
         vip.clickCoupon();
@@ -53,7 +55,7 @@ class TestChargeForVip extends UserLoginOrOut {
     }
 
     @Order(200)
-    @DisplayName("查看积分列表")
+    @Description("查看积分列表")
     @Test
     void checkPoints() {
         vip.clickPoints();
@@ -61,7 +63,8 @@ class TestChargeForVip extends UserLoginOrOut {
     }
 
     @Order(200)
-    @DisplayName("绑定解绑实体卡成功")
+    @Description("绑定解绑实体卡成功")
+    @Flaky
     @Test
     void bandAndunbandPhysicalCard() {
         String card = "1234567890";

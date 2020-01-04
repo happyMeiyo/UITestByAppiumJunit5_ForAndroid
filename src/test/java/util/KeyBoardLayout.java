@@ -3,8 +3,6 @@ package util;
 public class KeyBoardLayout {
     private int left;
     private int top;
-    private int length;
-    private int width;
 
     public KeyBoardLayout setLeft(int left) {
         this.left = left;
@@ -15,11 +13,11 @@ public class KeyBoardLayout {
         this.top = top;
     }
 
-    int getLeft() {
+    private int getLeft() {
         return left;
     }
 
-    int getTop() {
+    private int getTop() {
         return top;
     }
 

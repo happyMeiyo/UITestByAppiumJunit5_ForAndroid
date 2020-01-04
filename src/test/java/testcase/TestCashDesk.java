@@ -1,5 +1,6 @@
 package testcase;
 
+import io.qameta.allure.Description;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -51,7 +52,7 @@ class TestCashDesk extends UserLoginOrOut {
     }
 
 
-    @DisplayName("现金收款成功")
+    @Description("现金收款成功")
     @ParameterizedTest
     @MethodSource("getTelephoneOfVip")
     void payWithCashForVip(String telephone){
@@ -77,7 +78,7 @@ class TestCashDesk extends UserLoginOrOut {
         assertThat("收款成功，购物车清空", sc.isExistGoodsInCart(), equalTo(false));
     }
 
-    @DisplayName("会员卡余额收款成功")
+    @Description("会员卡余额收款成功")
     @ParameterizedTest
     @MethodSource("getTelephoneOfVip")
     void payWithVipCard(String telephone){
@@ -91,7 +92,7 @@ class TestCashDesk extends UserLoginOrOut {
 
     }
 
-    @DisplayName("二维码支付失败，现金支付成功")
+    @Description("二维码支付失败，现金支付成功")
     @ParameterizedTest
     @CsvSource({
             "5555552329379472897, 没有签约翼支付",

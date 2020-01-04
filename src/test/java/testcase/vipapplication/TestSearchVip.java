@@ -1,5 +1,6 @@
 package testcase.vipapplication;
 
+import io.qameta.allure.Description;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -20,7 +21,7 @@ class TestSearchVip extends UserLoginOrOut {
         vip.clickVipButton();
     }
 
-    @DisplayName("查找会员成功")
+    @Description("查找会员成功")
     @ParameterizedTest
     @ValueSource(strings = {"18621902561", "2561"})
     void searchVipSuccess(String telephone) {
@@ -30,7 +31,7 @@ class TestSearchVip extends UserLoginOrOut {
         assertThat("查找会员成功", vip.getTelephoneOfVip(), startsWith("1862190"));
     }
 
-    @DisplayName("查找会员失败")
+    @Description("查找会员失败")
     @ParameterizedTest
     @ValueSource(strings = {"123456789"})
     void searchVipFailure(String telephone) {

@@ -1,5 +1,6 @@
 package testcase;
 
+import io.qameta.allure.Description;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -20,8 +21,8 @@ class TestShoppingCart extends UserLoginOrOut {
     private static ShoppingCart sc = new ShoppingCart();
 
     @Order(1)
-    @DisplayName("添加商品到购物车")
     @ParameterizedTest
+    @Description("添加商品到购物车")
     @ValueSource(strings = {"红玫瑰苹果", "劲霸汤皇", "积分", "水果"})
     void addGoodsToShoppingCart(String productName) {
         sc.addToCart(productName);
@@ -29,8 +30,8 @@ class TestShoppingCart extends UserLoginOrOut {
     }
 
     @Order(100)
-    @DisplayName("挂单成功")
     @Test
+    @Description("挂单成功")
     void pendingOrder() {
         String amountInCart = sc.getAmountOfGoodsInCart();
         sc.pendingOrTakeOrder();
@@ -44,16 +45,16 @@ class TestShoppingCart extends UserLoginOrOut {
     }
 
     @Order(200)
-    @DisplayName("取单成功")
     @Test
+    @Description("取单成功")
     void takeFirstOrder() {
         sc.takeFirstOrderToCart();
         assertThat("商品加入购物车成功", sc.isExistGoodsInCart(), equalTo(true));
     }
 
     @Order(300)
-    @DisplayName("清空购物车")
     @Test
+    @Description("清空购物车")
     void deletesGoodsInCart() {
         sc.deletesGoodsInCart();
         assertThat("商品加入购物车成功", sc.isExistGoodsInCart(), equalTo(false));
@@ -66,9 +67,9 @@ class TestShoppingCart extends UserLoginOrOut {
     }
 
     @Order(400)
-    @DisplayName("购物车编辑商品：数量和价格")
     @ParameterizedTest
     @MethodSource("getQuantityAndPrice")
+    @Description("购物车编辑商品：数量和价格")
     void editGoods(String productName, String quantity, String discountPrice) {
         sc.addToCart(productName);
         assertThat("商品加入购物车成功", sc.isExistGoodsInCart(), equalTo(true));
@@ -90,12 +91,11 @@ class TestShoppingCart extends UserLoginOrOut {
     }
 
     @Order(500)
-    @DisplayName("购物车编辑商品：删除商品")
     @Test
+    @Description("购物车编辑商品：删除商品")
     void deleteOneGoodInCart(){
         sc.clickFirstGoodInCart();
         sc.deleteOneGoodInCart();
         assertThat("删除单个商品成功", sc.isExistGoodsInCart(), equalTo(false));
     }
-
 }

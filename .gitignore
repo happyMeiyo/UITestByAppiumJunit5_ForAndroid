@@ -6,3 +6,10 @@
 *.txt
 *.xml
 *.lst
+*.bat
+*.jar
+*.js
+*.css
+*.svg
+*.properties
+.allure/allure-2.4.1/bin/allure

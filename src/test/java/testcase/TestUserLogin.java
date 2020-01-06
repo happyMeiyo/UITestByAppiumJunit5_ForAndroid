@@ -16,6 +16,7 @@ import static org.hamcrest.Matchers.*;
 class TestUserLogin extends AppStartOrStop {
 
     @Test
+    @DisplayName("用户登录成功")
     @Description("用户登录成功")
     void userLoginSuccess() {
         UserLogin ul = new UserLogin();
@@ -38,6 +39,7 @@ class TestUserLogin extends AppStartOrStop {
     }
 
     @Test
+    @DisplayName("用户登录失败")
     @Description("用户登录失败")
     void userLoginFailure() {
         UserLogin ul = new UserLogin("201990", "qing", "a123456");

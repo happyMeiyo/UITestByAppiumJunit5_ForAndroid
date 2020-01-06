@@ -52,8 +52,9 @@ class TestCashDesk extends UserLoginOrOut {
     }
 
 
-    @Description("现金收款成功")
     @ParameterizedTest
+    @Description("识别会员，并现金收款成功")
+    @DisplayName("现金收款成功")
     @MethodSource("getTelephoneOfVip")
     void payWithCashForVip(String telephone){
         // 搜索会员
@@ -78,8 +79,9 @@ class TestCashDesk extends UserLoginOrOut {
         assertThat("收款成功，购物车清空", sc.isExistGoodsInCart(), equalTo(false));
     }
 
-    @Description("会员卡余额收款成功")
+    @DisplayName("会员卡余额收款成功")
     @ParameterizedTest
+    @Description("会员卡余额收款成功")
     @MethodSource("getTelephoneOfVip")
     void payWithVipCard(String telephone){
         //选择会员卡支付，搜索会员
@@ -94,6 +96,7 @@ class TestCashDesk extends UserLoginOrOut {
 
     @Description("二维码支付失败，现金支付成功")
     @ParameterizedTest
+    @DisplayName("二维码支付失败，现金支付成功")
     @CsvSource({
             "5555552329379472897, 没有签约翼支付",
             "2870561546045819218, 重新收款"

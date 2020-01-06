@@ -1,6 +1,7 @@
 package page;
 
 
+import io.qameta.allure.Step;
 import util.keyBoard;
 
 public class VipPage extends BasePage {
@@ -23,6 +24,7 @@ public class VipPage extends BasePage {
         return this.telephone;
     }
 
+    @Step("点击会员TAB")
     public void clickVipButton() {
         findElementByXpath("//android.widget.ScrollView//android.widget.TextView[@text='会员']").click();
     }
@@ -35,6 +37,7 @@ public class VipPage extends BasePage {
         }
     }
 
+    @Step("搜索会员")
     public void searchVipOfTelephone() {
         findElementById("ll_search_container").click();
         keyBoard.inputValueWithLeftKeyboard(telephone);
@@ -48,7 +51,7 @@ public class VipPage extends BasePage {
         return isElementPresent("By.Id", "ll_empty");
     }
 
-
+    @Step("查看券列表")
     public void clickCoupon() {
         findElementById("ll_check_coupon").click();
     }
@@ -60,6 +63,7 @@ public class VipPage extends BasePage {
 
     }
 
+    @Step("查看积分列表")
     public void clickPoints() {
         findElementById("rl_point").click();
     }
@@ -75,11 +79,13 @@ public class VipPage extends BasePage {
         findElementById("rl_balance").click();
     }
 
+    @Step("输入充值金额")
     public void inputBalanceForVip(String balance) {
         findElementById("tv_money_unit").click();
         keyBoard.inputValueWithRightKeyboard(balance);
     }
 
+    @Step("选择现金充值")
     public void chargeForVipWithCash() {
         findElementByXpath("//*[@resource-id='com.caibaopay.cashier:id/st_title']" +
                 "//android.widget.TextView[@text='现金支付']").click();
@@ -91,10 +97,12 @@ public class VipPage extends BasePage {
         return Float.parseFloat(findElementById("tv_recharge_amount").getText());
     }
 
+    @Step("确认现金充值成功")
     public void confirmChargeSuccess() {
         findElementById("tv_confirm").click();
     }
 
+    @Step("绑定实体卡")
     public void bandPhysicalCard(String card) {
         findElementById("rl_physical_card").click();
         keyBoard.inputValueWithRightKeyboard(card);
@@ -104,6 +112,7 @@ public class VipPage extends BasePage {
         return findElementById("tv_input_no").getText();
     }
 
+    @Step("解绑实体卡")
     public void unbandPhysicalCard() {
         findElementById("tv_unbind").click();
     }

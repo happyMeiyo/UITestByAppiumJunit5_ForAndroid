@@ -1,5 +1,6 @@
 package page;
 
+import io.qameta.allure.Step;
 import util.keyBoard;
 
 public class TempProduct extends BasePage {
@@ -13,6 +14,7 @@ public class TempProduct extends BasePage {
         this.price = price;
     }
 
+    @Step("输入临时商品的数量和价格")
     private void inputPriceAndQuantityOfTempPrd(String price, String quantity) {
         findElementById("tv_sale_price").click();
         keyBoard.inputValueWithTempKeyboard(price);
@@ -22,6 +24,7 @@ public class TempProduct extends BasePage {
 
     }
 
+    @Step("滑动分类,点击临时商品类目,选择临时商品, 输入售价和数量")
     private void inputPriceAndQuantityOfTempPrd(String categoryName) {
         //一级类目滑动到“临时商品”
         swipeByCoordinateWithElement(categoryName, 0.94, 0.73, 0.08, 0.08);
@@ -45,6 +48,7 @@ public class TempProduct extends BasePage {
         return findElementById("tv_total_price").getText();
     }
 
+    @Step("添加临时商品到购物车")
     public void addTempProductToCart(String categoryName) {
         inputPriceAndQuantityOfTempPrd(categoryName);
         findElementById("tv_confirm").click();

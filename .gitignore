@@ -13,3 +13,4 @@
 *.svg
 *.properties
 .allure/allure-2.4.1/bin/allure
+.allure/allure-2.8.1/bin/allure

@@ -2,6 +2,7 @@ package page;
 
 import io.appium.java_client.TouchAction;
 import io.appium.java_client.touch.offset.PointOption;
+import io.qameta.allure.Step;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.Point;
 import util.keyBoard;
@@ -30,12 +31,14 @@ public class ShoppingCart extends BasePage {
     }
 
     //点击添加商品
+    @Step("添加商品：{0}到购物车")
     public void addToCart(String productName) {
         findElementByXpath("//android.support.v7.widget.RecyclerView" +
                 "[@resource-id='com.caibaopay.cashier:id/rl_product']" +
                 "//android.widget.TextView[@text='" + productName + "']").click();
     }
 
+    @Step("购物车页，点击去收款")
     public void clickGoCashButton() {
         findElementById("ll_go_cash").click();
 
@@ -47,6 +50,7 @@ public class ShoppingCart extends BasePage {
     }
 
     //清空购物车
+    @Step("清空购物车的商品")
     public void deletesGoodsInCart() {
         findElementById("ll_delete_all").click();
         findElementById("tv_confirm").click();
@@ -58,6 +62,7 @@ public class ShoppingCart extends BasePage {
     }
 
     //挂单或取单
+    @Step("挂单或者取单")
     public void pendingOrTakeOrder() {
         findElementById("rl_take_order").click();
     }
@@ -71,23 +76,27 @@ public class ShoppingCart extends BasePage {
     }
 
     //获取挂单列表中第一个订单，到购物车
+    @Step("获取挂单列表中第一个订单，到购物车")
     public void takeFirstOrderToCart() {
         findElementsByXpath("//android.support.v7.widget.RecyclerView" +
                 "[@resource-id='com.caibaopay.cashier:id/rlv_order_list']//*").get(0).click();
     }
 
     //点击购物车中的第一个商品
+    @Step("点击购物车中的第一个商品")
     public void clickFirstGoodInCart() {
         findElementsByXpath("//android.support.v7.widget.RecyclerView" +
                 "[@resource-id='com.caibaopay.cashier:id/rv_product']" +
                 "//android.widget.LinearLayout[@resource-id='com.caibaopay.cashier:id/ll_container']").get(0).click();
     }
 
+    @Step("输入商品的数量")
     public void inputQuantityOfTheGood(String quantity) {
         findElementById("ll_count").click();
         keyBoard.inputValueWithMiddleKeyboard(quantity);
     }
 
+    @Step("输入折扣价格")
     public void inputDiscountPriceOfTheGood(String price) {
         findElementById("tv_discount_price").click();
         keyBoard.inputValueWithMiddleKeyboard(price);
@@ -110,15 +119,18 @@ public class ShoppingCart extends BasePage {
         return isElementPresent("By.Id", "tv_tag");
     }
 
+    @Step("商品恢复原价")
     public void restoreOriginalPriceOfGood() {
         findElementById("tv_restore_price").click();
         keyBoard.inputValueWithKeyboard("MIDDLE", "Y");
     }
 
+    @Step("删除单个商品")
     public void deleteOneGoodInCart() {
         findElementById("tv_delete").click();
     }
 
+    @Step("滑动一级类目，选择类目")
     public void swipeAndClickLevelCategory(String categoryName) {
         //滑动类目
         swipeByCoordinateWithElement(categoryName, 0.73, 0.94, 0.08, 0.08);

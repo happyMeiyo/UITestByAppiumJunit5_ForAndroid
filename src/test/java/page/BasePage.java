@@ -21,8 +21,6 @@ public class BasePage extends App {
     }
 
 
-
-
     static boolean isElementPresent(String by, String using) {
         try {
             switch (by) {
@@ -79,10 +77,10 @@ public class BasePage extends App {
     }
 
     /*
-    * 注意事项
-    * appium自带的输入法无法模拟控制键和基本键的，需要自行使用adb切换成搜狗或者android输入法，然后case完成之后记得切回appium输入法
-    * 需要吊起输入法界面才可进行模拟发送基本键命令
-    */
+     * 注意事项
+     * appium自带的输入法无法模拟控制键和基本键的，需要自行使用adb切换成搜狗或者android输入法，然后case完成之后记得切回appium输入法
+     * 需要吊起输入法界面才可进行模拟发送基本键命令
+     */
 //    void InputKeyCode() {
 //        try {
 //

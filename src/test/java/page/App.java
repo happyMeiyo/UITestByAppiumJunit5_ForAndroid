@@ -3,6 +3,7 @@ package page;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 import io.appium.java_client.android.AndroidDriver;
+import io.qameta.allure.Step;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
 import java.io.IOException;
@@ -13,7 +14,7 @@ import java.util.concurrent.TimeUnit;
 
 public class App {
 
-    static AndroidDriver driver;
+    public static AndroidDriver driver;
 
     private static class Capability {
         private Map<String, String> capability;
@@ -29,6 +30,7 @@ public class App {
 
     }
 
+    @Step("APP启动")
     public static void start() throws MalformedURLException {
         ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
         DesiredCapabilities desiredCapabilities = new DesiredCapabilities();
@@ -46,6 +48,7 @@ public class App {
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
     }
 
+    @Step("APP退出")
     public static void stop() {
         driver.quit();
     }

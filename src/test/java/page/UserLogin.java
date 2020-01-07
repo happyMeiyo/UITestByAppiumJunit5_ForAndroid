@@ -1,5 +1,7 @@
 package page;
 
+import io.qameta.allure.Step;
+
 public class UserLogin extends BasePage {
 
     private String merchantCode;
@@ -27,18 +29,22 @@ public class UserLogin extends BasePage {
         return password;
     }
 
+    @Step("输入企业号")
     private void inputMerchantCode() {
         findElementById("et_company_account").sendKeys(this.merchantCode);
     }
 
+    @Step("输入用户账号")
     private void inputUserCode() {
         findElementById("et_cashier_account").sendKeys(this.userCode);
     }
 
+    @Step("输入密码")
     private void inputPassword() {
         findElementById("et_pw").sendKeys(this.password);
     }
 
+    @Step("用户登录")
     public void userLogin() {
         /* 输入企业号 */
         inputMerchantCode();
@@ -64,6 +70,7 @@ public class UserLogin extends BasePage {
         return findElementById("tv_error").getText();
     }
 
+    @Step("用户退出")
     public String userLogout() {
         findElementById("ll_logout").click();
         return findElementById("et_cashier_account").getText();

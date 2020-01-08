@@ -5,20 +5,44 @@ import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
+import page.CashDeskPage;
 import page.ShoppingCart;
+import page.TempProduct;
+import page.VipPage;
+
+import java.math.BigDecimal;
+import java.util.Arrays;
+import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class TestKaiMaiCashier_Android extends UserLoginOrOut{
+    private ShoppingCart sc;
+    private CashDeskPage cp;
+    private TempProduct tp;
+    private VipPage vip;
+
+    @BeforeAll
+    void initApp()
+    {
+        sc = new ShoppingCart();
+        cp = new CashDeskPage();
+        tp = new TempProduct();
+        vip = new VipPage();
+    }
 
     @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
     @DisplayName("测试购物车")
-    @TestInstance(TestInstance.Lifecycle.PER_CLASS)
     @Nested
+    @TestInstance(TestInstance.Lifecycle.PER_CLASS)
     class TestShoppingCart{
 
-        private ShoppingCart sc = new ShoppingCart();
+        @BeforeAll
+        void clickCashButton() {
+            sc.clickCashButton();
+        }
 
         @Order(1)
         @ParameterizedTest
@@ -103,5 +127,172 @@ class TestKaiMaiCashier_Android extends UserLoginOrOut{
         }
     }
 
+    @DisplayName("测试收款页面")
+    @Nested
+    class TestCashDesk {
+        @BeforeEach
+        void addProductsToCart(){
+            //添加普通商品
+            List<String> products = Arrays.asList("红玫瑰苹果", "劲霸汤皇");
+            sc = new ShoppingCart(products);
+
+            // 添加临时商品
+            tp = new TempProduct("临时商品-计件", 4, 58);
+            tp.addTempProductToCart("临时商品");
+
+            //点击去付款
+            sc.clickGoCashButton();
+        }
+
+        @AfterEach
+        void swipeFirstLevelCategory(){
+            sc.swipeAndClickLevelCategory("新鲜水果");
+        }
+
+
+        @ParameterizedTest
+        @Description("识别会员，并现金收款成功")
+        @DisplayName("现金收款成功")
+        @ValueSource(strings = {"18621902561"})
+        void payWithCashForVip(String telephone){
+            // 搜索会员
+            cp.searchVip(telephone);
+
+            //选择现金支付
+            cp.selectPayWithCash();
+
+            //选择实收现金金额
+            cp.selectAmountReceived();
+
+            //计算找零金额正确
+            double changeAmount = 0.00;
+            changeAmount = new BigDecimal(cp.getAmountReceived())
+                    .subtract(new BigDecimal(cp.getAmountForPendingPay()))
+                    .doubleValue();
+            assertThat("找零金额计算正确", cp.getAmountForChange(), equalTo(String.format("%.2f", changeAmount)));
+
+            //发起现金收款
+            cp.payWithCash();
+            assertThat("收款成功，购物车清空", sc.isExistGoodsInCart(), equalTo(false));
+        }
+
+        @DisplayName("会员卡余额收款成功")
+        @ParameterizedTest
+        @Description("会员卡余额收款成功")
+        @ValueSource(strings = {"18621902561"})
+        void payWithVipCard(String telephone){
+            //选择会员卡支付，搜索会员
+            cp.searchVip(telephone);
+
+            //发起会员卡余额收款
+            cp.payWithVipCard();
+            assertThat("收款成功，购物车清空", sc.isExistGoodsInCart(), equalTo(false));
+
+        }
+
+        @Description("二维码支付失败，现金支付成功")
+        @ParameterizedTest
+        @DisplayName("二维码支付失败，现金支付成功")
+        @CsvSource({
+                "5555552329379472897, 没有签约翼支付",
+                "2870561546045819218, 重新收款"
+        })
+        void payWithBarcode(String barcode, String errorMsg){
+            //选择二维码支付，支付失败
+            cp.selectPayWithBarCode();
+
+            //手动输入付款码，支付失败
+            cp.inputBarcodeAndPay(barcode);
+            assertThat("二维码付款失败", cp.getErrorMsgForPayFail(), containsString(errorMsg));
+
+            //选择重新收款
+            cp.clickPayTryAgain();
+
+            //选择现金支付，支付成功
+            cp.selectPayWithCash();
+            cp.selectAmountReceived();
+            cp.payWithCash();
+            assertThat("收款成功，购物车清空", sc.isExistGoodsInCart(), equalTo(false));
+        }
+
+    }
+
+    @DisplayName("测试会员业务")
+    @Nested
+    @TestInstance(TestInstance.Lifecycle.PER_CLASS)
+    @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
+    class TestVipApplication{
+        @BeforeAll
+        void clickVipButton() {
+            vip.clickVipButton();
+        }
+
+        @Order(1)
+        @Description("查找会员成功")
+        @DisplayName("查找会员成功")
+        @ParameterizedTest
+        @ValueSource(strings = {"18621902561", "2561"})
+        void searchVipSuccess(String telephone) {
+            vip.setTelephone(telephone);
+            vip.clearVipNoForSearch();
+            vip.searchVipOfTelephone();
+            assertThat("查找会员成功", vip.getTelephoneOfVip(), startsWith("1862190"));
+        }
+
+        @Order(50)
+        @Description("会员现金充值成功")
+        @DisplayName("会员现金充值成功")
+        @Test
+        void chargeForVipWithCash() {
+            vip.clickBalance();
+            // 输入充值金额 5
+            vip.inputBalanceForVip("5");
+            vip.chargeForVipWithCash();
+            assertThat("充值成功", vip.getBalanceOfCharge(), equalTo(5.0F));
+            vip.confirmChargeSuccess();
+        }
+
+        @Order(100)
+        @Description("查看券列表")
+        @DisplayName("查看券列表")
+        @Test
+        void checkCoupon() {
+            vip.clickCoupon();
+            assertThat("查看券列表", vip.isListOfCouponsExist(), equalTo(true));
+        }
+
+        @Order(200)
+        @Description("查看积分列表")
+        @DisplayName("查看积分列表")
+        @Test
+        void checkPoints() {
+            vip.clickPoints();
+            assertThat("查看积分列表", vip.isListOfPointsExist(), equalTo(true));
+        }
+
+        @Order(200)
+        @Description("绑定实体卡成功之后，解绑实体卡")
+        @DisplayName("绑定解绑实体卡成功")
+        @Test
+        void bandAndunbandPhysicalCard() {
+            String card = "1234567890";
+            vip.bandPhysicalCard(card);
+            assertThat("绑定实体卡成功", vip.getPhysicalCardNo(), equalTo(card));
+
+            vip.unbandPhysicalCard();
+        }
+
+        @Order(300)
+        @Description("查找会员失败")
+        @DisplayName("查找会员失败")
+        @ParameterizedTest
+        @ValueSource(strings = {"123456789"})
+        void searchVipFailure(String telephone) {
+            vip.setTelephone(telephone);
+            vip.clearVipNoForSearch();
+            vip.searchVipOfTelephone();
+            assertThat("查找会员失败", vip.searchVipFailure(), equalTo(true));
+        }
+    }
 
 }

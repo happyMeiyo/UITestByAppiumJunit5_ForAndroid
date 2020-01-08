@@ -4,6 +4,8 @@ import io.appium.java_client.MobileElement;
 import io.appium.java_client.TouchAction;
 import io.appium.java_client.touch.offset.PointOption;
 import org.openqa.selenium.Dimension;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.List;
 
@@ -20,25 +22,30 @@ public class BasePage extends App {
         return driver.findElementsByXPath(using);
     }
 
-
-    static boolean isElementPresent(String by, String using) {
-        try {
+    public static boolean waitForPresence(String by, int timeLimitInSeconds, String using){
+        MobileElement mobileElement;
+        try{
             switch (by) {
                 case "By.Id":
-                    findElementById(using);
+                    mobileElement = findElementById(using);
                     break;
                 case "By.Xpath":
-                    findElementByXpath(using);
+                    mobileElement = findElementByXpath(using);
                     break;
                 default:
                     System.out.println("查找类型错误");
                     return false;
             }
-            return true;
-        } catch (Exception e) {
-            e.printStackTrace();
+            WebDriverWait wait = new WebDriverWait(driver, timeLimitInSeconds);
+            wait.until(ExpectedConditions.visibilityOf(mobileElement));
+            return mobileElement.isDisplayed();
+        }catch(Exception e){
+            System.out.println(e.getMessage());
             return false;
-        }
+        } }
+
+    static boolean isElementPresent(String by, String using) {
+        return waitForPresence(by,2, using);
     }
 
     protected static void touchKeyboard(int xPoint, int yPoint) {

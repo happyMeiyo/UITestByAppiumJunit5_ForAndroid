@@ -8,6 +8,8 @@ public class TempProduct extends BasePage {
     private int quantity;
     private double price;
 
+    public TempProduct(){}
+
     public TempProduct(String productName, int quantity, double price) {
         this.productName = productName;
         this.quantity = quantity;

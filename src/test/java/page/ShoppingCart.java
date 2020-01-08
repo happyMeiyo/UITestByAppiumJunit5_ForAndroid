@@ -11,7 +11,6 @@ import java.util.List;
 
 public class ShoppingCart extends BasePage {
     public ShoppingCart() {
-        clickCashButton();
     }
 
     public ShoppingCart(List<String> products) {
@@ -19,7 +18,7 @@ public class ShoppingCart extends BasePage {
         addToCart(products);
     }
 
-    private void clickCashButton() {
+    public void clickCashButton() {
         findElementByXpath("//android.widget.ScrollView//android.widget.TextView[@text='收银']").click();
     }
 

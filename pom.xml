@@ -16,7 +16,9 @@
         <maven-surefire-plugin.version>2.22.2</maven-surefire-plugin.version>
         <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
         <allure-maven.version>2.10.0</allure-maven.version>
-        <appium-java-client.version>v7.2.0</appium-java-client.version>
+        <appium-java-client.version>7.3.0</appium-java-client.version>
+        <jackson-dataformat-yaml.version>2.10.1</jackson-dataformat-yaml.version>
+        <hamcrest-core.version>2.2</hamcrest-core.version>
 
         <encoding>UTF-8</encoding>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -38,13 +40,14 @@
     </repositories>
 
     <dependencies>
-
+        <!-- https://mvnrepository.com/artifact/io.appium/java-client -->
         <dependency>
-            <groupId>com.github.appium</groupId>
+            <groupId>io.appium</groupId>
             <artifactId>java-client</artifactId>
             <version>${appium-java-client.version}</version>
             <scope>test</scope>
         </dependency>
+
 
         <!--JUNIT 5 Dependencies-->
         <dependency>
@@ -58,20 +61,20 @@
         <dependency>
             <groupId>org.hamcrest</groupId>
             <artifactId>hamcrest-core</artifactId>
-            <version>RELEASE</version>
+            <version>${hamcrest-core.version}</version>
             <scope>test</scope>
         </dependency>
 
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
-            <version>RELEASE</version>
+            <version>${jackson-dataformat-yaml.version}</version>
         </dependency>
 
         <dependency>
             <groupId>com.fasterxml.jackson.dataformat</groupId>
             <artifactId>jackson-dataformat-yaml</artifactId>
-            <version>RELEASE</version>
+            <version>${jackson-dataformat-yaml.version}</version>
             <scope>test</scope>
         </dependency>
 

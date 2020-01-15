@@ -105,7 +105,7 @@ public class VipPage extends BasePage {
     @Step("绑定实体卡")
     public void bandPhysicalCard(String card) {
         findElementById("rl_physical_card").click();
-        waitForPresence("By.Id", 2, "com.caibaopay.cashier:id/keyboard_normal");
+        waitForPresence("By.Id", 1, "com.caibaopay.cashier:id/keyboard_normal");
         keyBoard.inputValueWithRightKeyboard(card);
     }
 

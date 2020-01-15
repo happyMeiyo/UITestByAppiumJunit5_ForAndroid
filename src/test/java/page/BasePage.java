@@ -22,7 +22,7 @@ public class BasePage extends App {
         return driver.findElementsByXPath(using);
     }
 
-    public static boolean waitForPresence(String by, int timeLimitInSeconds, String using){
+    static boolean waitForPresence(String by, int timeLimitInSeconds, String using){
         MobileElement mobileElement;
         try{
             switch (by) {

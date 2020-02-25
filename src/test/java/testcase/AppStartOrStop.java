@@ -5,13 +5,11 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import page.App;
 
-import java.net.MalformedURLException;
-
 @DisplayName("启动或停止APP")
 class AppStartOrStop {
 
     @BeforeAll
-    static void startApp() throws MalformedURLException {
+    static void startApp() {
         App.start();
     }
 

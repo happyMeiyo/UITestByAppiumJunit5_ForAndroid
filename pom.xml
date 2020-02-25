@@ -69,6 +69,7 @@
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
             <version>${jackson-dataformat-yaml.version}</version>
+            <scope>test</scope>
         </dependency>
 
         <dependency>
@@ -117,7 +118,7 @@
                         </property>
                         <property>
                             <name>allure.results.directory</name>
-                            <value>${project.basedir}/target/allure-results</value>
+                            <value>${project.build.directory}/allure-results</value>
                         </property>
                     </systemProperties>
                     <reportFormat>plain</reportFormat>
@@ -151,7 +152,7 @@
                 <artifactId>allure-maven</artifactId>
                 <version>${allure-maven.version}</version>
                 <configuration>
-                    <reportVersion>2.8.1</reportVersion>
+                    <reportVersion>2.13.2</reportVersion>
                 </configuration>
             </plugin>
         </plugins>

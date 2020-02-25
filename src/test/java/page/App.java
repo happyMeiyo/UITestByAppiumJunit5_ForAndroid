@@ -31,7 +31,7 @@ public class App {
     }
 
     @Step("APP启动")
-    public static void start() throws MalformedURLException {
+    public static void start() {
         ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
         DesiredCapabilities desiredCapabilities = new DesiredCapabilities();
 

@@ -57,8 +57,8 @@ public class VipPage extends BasePage {
     }
 
     public boolean isListOfCouponsExist() {
-        int countOfCoupon = findElementsByXpath("//*[@resource-id='com.caibaopay.cashier:id/rl_coupon']" +
-                "/android.widget.LinearLayout[@resource-id='com.caibaopay.cashier:id/ll_container']").size();
+        int countOfCoupon = findElementsByXpath("//*[@resource-id='com.caibaopay.cashier.test:id/rl_coupon']" +
+                "/android.widget.LinearLayout[@resource-id='com.caibaopay.cashier.test:id/ll_container']").size();
         return countOfCoupon != 0;
 
     }
@@ -69,8 +69,8 @@ public class VipPage extends BasePage {
     }
 
     public boolean isListOfPointsExist() {
-        int countOfPointList = findElementsByXpath("//*[@resource-id='com.caibaopay.cashier:id/rl_point_list']" +
-                "/android.widget.LinearLayout[@resource-id='com.caibaopay.cashier:id/ll_container']").size();
+        int countOfPointList = findElementsByXpath("//*[@resource-id='com.caibaopay.cashier.test:id/rl_point_list']" +
+                "/android.widget.LinearLayout[@resource-id='com.caibaopay.cashier.test:id/ll_container']").size();
         return countOfPointList != 0;
 
     }
@@ -87,7 +87,7 @@ public class VipPage extends BasePage {
 
     @Step("选择现金充值")
     public void chargeForVipWithCash() {
-        findElementByXpath("//*[@resource-id='com.caibaopay.cashier:id/st_title']" +
+        findElementByXpath("//*[@resource-id='com.caibaopay.cashier.test:id/st_title']" +
                 "//android.widget.TextView[@text='现金支付']").click();
 
         findElementById("tv_confirm_pay").click();

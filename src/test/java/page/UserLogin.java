@@ -73,6 +73,7 @@ public class UserLogin extends BasePage {
     @Step("用户退出")
     public String userLogout() {
         findElementById("ll_logout").click();
+        findElementById("tv_exit").click();
         return findElementById("et_cashier_account").getText();
     }
 

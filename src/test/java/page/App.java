@@ -7,7 +7,7 @@ import io.qameta.allure.Step;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
 import java.io.IOException;
-import java.net.MalformedURLException;
+import java.io.InputStream;
 import java.net.URL;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
@@ -31,12 +31,12 @@ public class App {
     }
 
     @Step("APP启动")
-    public static void start() throws MalformedURLException {
+    public static void start(){
         ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
         DesiredCapabilities desiredCapabilities = new DesiredCapabilities();
 
         try {
-            Capability cp = mapper.readValue(App.class.getResourceAsStream("/app.yml"), Capability.class);
+            Capability cp = mapper.readValue(App.class.getResourceAsStream("/page/app.yml"), Capability.class);
             cp.capability.forEach(desiredCapabilities::setCapability);
             URL remoteUrl = new URL(cp.url);
             driver = new AndroidDriver(remoteUrl, desiredCapabilities);

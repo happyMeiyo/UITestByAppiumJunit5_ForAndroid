@@ -12,7 +12,7 @@ public class CashDeskPage extends BasePage {
 
     @Step("搜索会员")
     public void searchVip(String telephone) {
-        findElementsByXpath("//android.support.v7.widget.RecyclerView[@resource-id='com.caibaopay.cashier:id/rv_pay_type']" +
+        findElementsByXpath("//android.support.v7.widget.RecyclerView[@resource-id='com.caibaopay.cashier.test:id/rv_pay_type']" +
                 "//android.widget.TextView[@text='会员卡']").get(0).click();
         findElementById("ll_search_container").click();
 
@@ -25,7 +25,7 @@ public class CashDeskPage extends BasePage {
 
     @Step("选择支付方式：现金支付")
     public void selectPayWithCash() {
-        findElementsByXpath("//android.support.v7.widget.RecyclerView[@resource-id='com.caibaopay.cashier:id/rv_pay_type']" +
+        findElementsByXpath("//android.support.v7.widget.RecyclerView[@resource-id='com.caibaopay.cashier.test:id/rv_pay_type']" +
                 "//android.widget.TextView[@text='现金&记账']").get(0).click();
     }
 
@@ -54,7 +54,7 @@ public class CashDeskPage extends BasePage {
 
     @Step("发起二维支付码收款")
     public void selectPayWithBarCode() {
-        findElementsByXpath("//android.support.v7.widget.RecyclerView[@resource-id='com.caibaopay.cashier:id/rv_pay_type']" +
+        findElementsByXpath("//android.support.v7.widget.RecyclerView[@resource-id='com.caibaopay.cashier.test:id/rv_pay_type']" +
                 "//android.widget.TextView[@text='扫码支付']").get(0).click();
     }
 

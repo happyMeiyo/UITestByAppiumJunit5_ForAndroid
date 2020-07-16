@@ -26,7 +26,7 @@ public class ShoppingCart extends BasePage {
     // 加入购物车
     private void addToCart(List<String> productNames) {
         productNames.forEach(productName -> findElementByXpath("//android.support.v7.widget.RecyclerView" +
-                "[@resource-id='com.caibaopay.cashier:id/rl_product']" +
+                "[@resource-id='com.caibaopay.cashier.test:id/rl_product']" +
                 "//android.widget.TextView[@text='" + productName + "']").click());
     }
 
@@ -34,7 +34,7 @@ public class ShoppingCart extends BasePage {
     @Step("添加商品：{0}到购物车")
     public void addToCart(String productName) {
         findElementByXpath("//android.support.v7.widget.RecyclerView" +
-                "[@resource-id='com.caibaopay.cashier:id/rl_product']" +
+                "[@resource-id='com.caibaopay.cashier.test:id/rl_product']" +
                 "//android.widget.TextView[@text='" + productName + "']").click();
     }
 
@@ -58,7 +58,7 @@ public class ShoppingCart extends BasePage {
 
     public boolean isExistGoodsInCart() {
         return (findElementsByXpath("//android.support.v7.widget.RecyclerView" +
-                "[@resource-id='com.caibaopay.cashier:id/rv_product']/*").size() > 0);
+                "[@resource-id='com.caibaopay.cashier.test:id/rv_product']/*").size() > 0);
     }
 
     //挂单或取单
@@ -70,8 +70,8 @@ public class ShoppingCart extends BasePage {
     //获取挂单列表中第一个订单的金额
     public String getAmountOfFirstOrder() {
         return findElementsByXpath("//android.support.v7.widget.RecyclerView" +
-                "[@resource-id='com.caibaopay.cashier:id/rlv_order_list']" +
-                "//android.widget.TextView[@resource-id='com.caibaopay.cashier:id/ftv_amount']").get(0).getText();
+                "[@resource-id='com.caibaopay.cashier.test:id/rlv_order_list']" +
+                "//android.widget.TextView[@resource-id='com.caibaopay.cashier.test:id/ftv_amount']").get(0).getText();
 
     }
 
@@ -79,15 +79,15 @@ public class ShoppingCart extends BasePage {
     @Step("获取挂单列表中第一个订单，到购物车")
     public void takeFirstOrderToCart() {
         findElementsByXpath("//android.support.v7.widget.RecyclerView" +
-                "[@resource-id='com.caibaopay.cashier:id/rlv_order_list']//*").get(0).click();
+                "[@resource-id='com.caibaopay.cashier.test:id/rlv_order_list']//*").get(0).click();
     }
 
     //点击购物车中的第一个商品
     @Step("点击购物车中的第一个商品")
     public void clickFirstGoodInCart() {
         findElementsByXpath("//android.support.v7.widget.RecyclerView" +
-                "[@resource-id='com.caibaopay.cashier:id/rv_product']" +
-                "//android.widget.LinearLayout[@resource-id='com.caibaopay.cashier:id/ll_container']").get(0).click();
+                "[@resource-id='com.caibaopay.cashier.test:id/rv_product']" +
+                "//android.widget.LinearLayout[@resource-id='com.caibaopay.cashier.test:id/ll_container']").get(0).click();
     }
 
     @Step("输入商品的数量")
@@ -133,18 +133,18 @@ public class ShoppingCart extends BasePage {
     @Step("滑动一级类目，选择类目")
     public void swipeAndClickLevelCategory(String categoryName) {
         //滑动类目
-        swipeByCoordinateWithElement(categoryName, 0.73, 0.94, 0.08, 0.08);
+//        swipeByCoordinateWithElement(categoryName, 0.73, 0.94, 0.08, 0.08);
 
         //点击类目
         findElementByXpath("//android.support.v7.widget.RecyclerView" +
-                "[@resource-id='com.caibaopay.cashier:id/rl_parent_category']" +
+                "[@resource-id='com.caibaopay.cashier.test:id/rl_parent_category']" +
                 "//android.widget.TextView[@text='" + categoryName + "']").click();
     }
 
     public void deleteOneGoodWithLeftSwipe() {
         String element = "//android.support.v7.widget.RecyclerView" +
-                "[@resource-id='com.caibaopay.cashier:id/rv_product']" +
-                "//android.widget.LinearLayout[@resource-id='com.caibaopay.cashier:id/ll_container']";
+                "[@resource-id='com.caibaopay.cashier.test:id/rv_product']" +
+                "//android.widget.LinearLayout[@resource-id='com.caibaopay.cashier.test:id/ll_container']";
 
         Point start=getLocationOfTheFirstGoodInCart(element);
         int startX = start.x;

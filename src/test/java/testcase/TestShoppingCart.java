@@ -24,7 +24,7 @@ class TestShoppingCart extends UserLoginOrOut {
     @ParameterizedTest
     @DisplayName("添加商品到购物车")
     @Description("添加商品到购物车")
-    @ValueSource(strings = {"红玫瑰苹果", "劲霸汤皇", "积分", "水果"})
+    @ValueSource(strings = {"果脯", "哈密瓜切果"})
     void addGoodsToShoppingCart(String productName) {
         sc.addToCart(productName);
         assertThat("商品加入购物车成功", sc.isExistGoodsInCart(), equalTo(true));
@@ -66,7 +66,7 @@ class TestShoppingCart extends UserLoginOrOut {
 
     private static Stream<Arguments> getQuantityAndPrice() {
         return Stream.of(
-                arguments("水果", "5", "15.5")
+                arguments("果脯", "5", "1.5")
         );
     }
 

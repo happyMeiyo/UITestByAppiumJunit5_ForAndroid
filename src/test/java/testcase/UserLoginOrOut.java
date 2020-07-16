@@ -21,7 +21,7 @@ public class UserLoginOrOut extends AppStartOrStop {
     static void userLogin() {
         ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
         try {
-            UserLogin user = mapper.readValue(UserLoginOrOut.class.getResourceAsStream("/shopManagerInfo.yml"),
+            UserLogin user = mapper.readValue(UserLoginOrOut.class.getResourceAsStream("/testcase/shopManagerInfo.yml"),
                                               UserLogin.class);
 
             ul = new UserLogin(user.getMerchantCode(), user.getUserCode(), user.getPassword());
@@ -30,9 +30,7 @@ public class UserLoginOrOut extends AppStartOrStop {
         }
         ul.userLogin();
         String shopInfo = ul.getShopInfo();
-
-        assertThat(shopInfo, startsWith("您好 ！清"));
-        assertThat(shopInfo, endsWith("清雨的门店"));
+        assertThat(shopInfo, containsString("您好"));
     }
 
     @AfterAll

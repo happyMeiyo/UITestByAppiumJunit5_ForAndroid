@@ -27,16 +27,16 @@ public class TempProduct extends BasePage {
     @Step("滑动分类,点击临时商品类目,选择临时商品, 输入售价和数量")
     private void inputPriceAndQuantityOfTempPrd(String categoryName) {
         //一级类目滑动到“临时商品”
-        swipeByCoordinateWithElement(categoryName, 0.94, 0.73, 0.08, 0.08);
+        //swipeByCoordinateWithElement(categoryName, 0.94, 0.73, 0.08, 0.08);
 
         //点击临时商品类目
         findElementByXpath("//android.support.v7.widget.RecyclerView" +
-                "[@resource-id='com.caibaopay.cashier:id/rl_parent_category']" +
+                "[@resource-id='com.caibaopay.cashier.test:id/rl_parent_category']" +
                 "//android.widget.TextView[@text='" + categoryName + "']").click();
 
         //点击临时商品
         findElementByXpath("//android.support.v7.widget.RecyclerView" +
-                "[@resource-id='com.caibaopay.cashier:id/rl_product']" +
+                "[@resource-id='com.caibaopay.cashier.test:id/rl_product']" +
                 "//android.widget.TextView[@text='" + productName + "']").click();
 
         //输入售价和数量

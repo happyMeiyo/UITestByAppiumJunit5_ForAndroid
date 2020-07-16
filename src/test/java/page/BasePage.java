@@ -9,7 +9,7 @@ import java.util.List;
 
 public class BasePage extends App {
     static MobileElement findElementById(String using) {
-        return (MobileElement) driver.findElementById("com.caibaopay.cashier:id/" + using);
+        return (MobileElement) driver.findElementById("com.caibaopay.cashier.test:id/" + using);
     }
 
     static MobileElement findElementByXpath(String using) {
